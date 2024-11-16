@@ -1,0 +1,411 @@
+" .ideavimrc is a configuration file for IdeaVim plugin. It uses
+"   the same commands as the original .vimrc configuration.
+" You can find a list of commands here: https://jb.gg/h38q75
+" Find more examples here: https://jb.gg/share-ideavimrc
+
+"" -- Suggested options --
+" Show a few lines of context around the cursor. Note that this makes the
+" text scroll if you mouse-click near the start or end of the window.
+
+" --------------------------------------------------------------------------------
+
+" IN TREE -> FOLD-ALL <C-->  ||  EXPAND-ALL <C-=>
+" zt -> cursor top
+" zb -> cursor bottom
+" zz -> cursor middle
+" <C-r> -> normal mode REDO 使用 Ctrl-R 恢复上一次撤销的更改。
+
+" --------------------------------------------------------------------------------
+
+" Set Handler
+
+" mode introduce
+" n -> normal mode
+" i -> insert mode
+" x -> virtual mode
+" v -> virtual mode and select mode
+" a -> all mode
+sethandler <C-W> a:vim
+sethandler <C-C> n-v:ide i:vim
+sethandler <C-N> a:vim
+sethandler <C-P> a:vim
+sethandler <C-X> a:vim
+sethandler <C-U> a:vim
+sethandler <C-E> a:vim
+sethandler <A-E> a:vim
+sethandler <A-U> a:vim
+sethandler <C-I> a:vim
+sethandler <C-R> a:vim
+sethandler <C-K> i:vim
+
+" --------------------------------------------------------------------------------
+
+" Set Settings
+
+set clipboard+=unnamedplus
+set scrolloff=5
+set incsearch
+set ignorecase
+set hlsearch
+set relativenumber
+set fileencoding="uft-8"
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab;
+set wrap=true
+set foldmethod="indent"
+set shortmess="c"
+set whichwrap="<>[]hl"
+set iskeyword="-"
+set foldlevel=99
+set foldenable
+set smartindent
+set completeopt={'longest', 'noinsert', 'menuone', 'noselect', 'preview'}
+syntax on
+
+" --------------------------------------------------------------------------------
+" Do incremental searching.
+
+" Don't use Ex mode, use Q for formatting.
+
+" --- Enable IdeaVim plugins https://jb.gg/ideavim-plugins
+
+" Highlight copied text
+"Plug 'machakann/vim-highlightedyank'
+" Commentary plugin
+"Plug 'tpope/vim-commentary'
+
+
+
+"" -- Map IDE actions to IdeaVim -- https://jb.gg/abva4t
+"" Map \r to the Reformat Code actio
+"map \r <Action>(ReformatCode)
+
+"" Map <leader>d to start debug
+"map <leader>d <Action>(Debug)
+
+"" Map \b to toggle the breakpoint on the current line
+"map \b <Action>(ToggleLineBreakpoint)
+
+" -------------------- split line -------------------- "
+
+" reset leader map
+let mapleader=" "
+
+noremap u k
+noremap e j
+noremap n h
+noremap i l
+noremap U 5k
+noremap E 5j
+noremap N 0
+noremap I $
+noremap W 5w
+noremap B 5b
+noremap h e
+
+onoremap k i
+
+inoremap <C-U> <UP>
+inoremap <C-E> <DOWN>
+
+nnoremap <LEADER>wq :wq<CR>
+nnoremap l u
+noremap k i
+noremap K I
+nnoremap <leader><CR> :nohlsearch<CR>
+nnoremap <C-.> n
+nnoremap <C-,> N
+nnoremap <space> <nop>
+
+nnoremap <LEADER>ws :set nosplitbelow<CR>:split<CR>:set splitbelow<CR>
+nnoremap <LEADER>wS :set splitbelow<CR>:split<CR>
+nnoremap <LEADER>wv :set nosplitright<CR>:vsplit<CR>:set splitright<CR>
+nnoremap <LEADER>wV :set splitright<CR>:vsplit<CR>
+
+nnoremap <LEADER>we <C-w>j
+nnoremap <LEADER>wu <C-w>k
+nnoremap <LEADER>wn <C-w>h
+nnoremap <LEADER>wi <C-w>l
+nnoremap <LEADER>ww <C-w>w
+
+nnoremap <C-S> :w<CR>
+
+noremap <ESC> <ESC>:nohlsearch<CR>
+
+map <A-U> :move .-2<CR>==e
+map <A-E> :move .+1<CR>==u
+
+map <A-S-E> :move .+1<CR>==
+map <A-S-U> :move .-2<CR>==
+
+xmap <A-u> :move '<-2<cr>gv-gvu
+xmap <A-e> :move '>+1<cr>gv-gvu
+
+nnoremap < <<
+nnoremap > >>
+
+nnoremap <LEADER>bi :bnext<CR>
+nnoremap <LEADER>bn :bprevious<CR>
+
+vnoremap Y "+y
+vnoremap < <gv
+vnoremap > >gv
+vnoremap P "_dP
+
+cnoremap <A-i> <Right>
+cnoremap <A-n> <left>
+cnoremap <A-u> <Up>
+cnoremap <A-e> <Down>
+
+inoremap <C-I> :action CodeCompletion<CR>
+
+" ---------------------------------------------
+" Tabs
+
+nnoremap <LEADER>ti :tabn<CR>
+nnoremap <LEADER>tn :tabp<CR>
+nnoremap <LEADER>tx :tabc<CR>
+map <LEADER>tA <Action>(CloseAllEditors)
+map <LEADER>ta (CloseAllUnpinnedEditors)
+map <LEADER>to <Action>(CloseAllEditorsButActive)
+map <LEADER>tz <Action>(PinActiveEditorTab)
+map <LEADER>tw <Action>(EditSourceInNewWindow)
+
+" ---------------------------------------------
+" Search
+
+map <LEADER>s' <Action>(Switcher)
+" 使用内置的搜索
+map / <Action>(Find)
+map <LEADER>sl <Action>(RecentLocations)
+map <LEADER>sy <Action>(GotoSymbol)
+map <LEADER>sf <Action>(FindInPath)
+map <LEADER>se <Action>(TextSearchAction)
+map <LEADER>ss <Action>(SearchEverywhere)
+map <LEADER>sa <Action>(GotoAction)
+map <LEADER><LEADER> <Action>(GotoFile)
+
+" ---------------------------------------------
+" Actions
+
+map \r <Action>(Run)
+map \x <Action>(Stop)
+map \d <Action>(Debug)
+map \p <Action>(ToggleLineBreakpoint)
+
+map \gpl <Action>(Git.Pull)
+map \gc <Action>(CheckinProject)
+map \gps <Action>(Vcs.Push)
+
+map zn <Action>(Back)
+map zi <Action>(Forward)
+
+map \ci <Action>(CloseAllToTheRight)
+map \cn <Action>(CloseAllToTheLeft)
+noremap == :action ReformatCode<CR>
+
+map \s <Action>(MoveEditorToOppositeTabGroup)
+map \z <Action>(ToggleRenderedDocPresentation)
+
+map <LEADER>zz <Action>(TogglePresentationMode)
+
+" ---------------------------------------------
+" FOLD
+map zm <Action>(ExpandAllRegions)
+map za <Action>(CollapseAllRegions)
+
+" ---------------------------------------------
+" LSP
+
+map gi <Action>(GotoImplementation)
+map gy <Action>(GotoTypeDeclaration)
+map gd <Action>(GotoDeclaration)
+map go <Action>(GoToCodeGroup)
+map <LEADER>h <Action>(ShowHoverInfo)
+imap <C-K> :action ShowHoverInfo<CR>
+map <LEADER>ca <Action>(ShowIntentionActions)
+map <LEADER>cr <Action>(RenameElement)
+
+" ---------------------------------------------
+" Bookmarks
+map mm <Action>(ToggleBookmark)
+map ma <Action>(EditBookmark)
+map mt <Action>(ToggleBookmarkWithMnemonic)
+map ]m <Action>(GotoNextBookmark)
+map [m <Action>(GotoPreviousBookmark)
+
+map gma <Action>(GotoBookmarkA)
+map gmb <Action>(GotoBookmarkB)
+map gmc <Action>(GotoBookmarkC)
+map gmd <Action>(GotoBookmarkD)
+map gme <Action>(GotoBookmarkE)
+map gmf <Action>(GotoBookmarkF)
+map gmg <Action>(GotoBookmarkG)
+map gmh <Action>(GotoBookmarkH)
+map gmi <Action>(GotoBookmarkI)
+map gmj <Action>(GotoBookmarkJ)
+map gmk <Action>(GotoBookmarkK)
+map gml <Action>(GotoBookmarkL)
+map gmm <Action>(GotoBookmarkM)
+map gmn <Action>(GotoBookmarkN)
+map gmo <Action>(GotoBookmarkO)
+map gmp <Action>(GotoBookmarkP)
+map gmq <Action>(GotoBookmarkQ)
+map gmr <Action>(GotoBookmarkR)
+map gms <Action>(GotoBookmarkS)
+map gmt <Action>(GotoBookmarkT)
+map gmu <Action>(GotoBookmarkU)
+map gmv <Action>(GotoBookmarkV)
+map gmw <Action>(GotoBookmarkW)
+map gmx <Action>(GotoBookmarkX)
+map gmy <Action>(GotoBookmarkY)
+map gmz <Action>(GotoBookmarkZ)
+map gm0 <Action>(GotoBookmark0)
+map gm1 <Action>(GotoBookmark1)
+map gm2 <Action>(GotoBookmark2)
+map gm3 <Action>(GotoBookmark3)
+map gm4 <Action>(GotoBookmark4)
+map gm5 <Action>(GotoBookmark5)
+map gm6 <Action>(GotoBookmark6)
+map gm7 <Action>(GotoBookmark7)
+map gm8 <Action>(GotoBookmark8)
+map gm9 <Action>(GotoBookmark9)
+
+" ---------------------------------------------
+" EXTRA
+inoremap <C-J> <CR>
+" insert map -> <C-o> temporary normal
+
+" ---------------------------------------------
+" Plugins
+
+set highlightedyank
+let g:highlightedyank_highlight_duration = 500
+
+set vim-paragraph-motion
+
+set surround
+" for example: yskw[ ds' cs'" yssb yss( 整行加括号           visual mode: S(
+
+set commentary
+" for example gcc  visual mode: gc        gck{
+
+set multiple-cursors
+nmap <C-n> <Plug>NextWholeOccurrence
+xmap <C-n> <Plug>NextWholeOccurrence
+nmap g<C-n> <Plug>NextOccurrence
+xmap g<C-n> <Plug>NextOccurrence
+xmap <C-x> <Plug>SkipOccurrence
+xmap <C-p> <Plug>RemoveOccurrence
+
+" Note that the default <A-n> and g<A-n> shortcuts don't work on Mac due to dead keys.
+" <A-n> is used to enter accented text e.g. ñ
+" Feel free to pick your own mappings that are not affected. I like to use <leader>
+nmap <leader><C-n> <Plug>AllWholeOccurrences
+xmap <leader><C-n> <Plug>AllWholeOccurrences
+nmap <leader>g<C-n> <Plug>AllOccurrences
+xmap <leader>g<C-n> <Plug>AllOccurrences
+
+set which-key
+set notimeout
+set timeoutlen=5000
+
+" need install IdeaVim-Quickscope
+set quickscope
+let g:qs_disable_for_diffs=1
+
+set matchit
+
+" need vim-flash plugin
+map s <Action>(flash.search)
+
+
+" ---------------------------------
+" plugin -> argtextobj
+" 多加了一个 a 来表示()中的参数
+set argtextobj
+omap ka <Plug>InnerArgument
+vmap ka <Plug>InnerArgument
+unmap ia
+" option. turn 1 to search the most toplevel function
+let g:argumentobject_force_toplevel = 0
+
+" ---------------------------------
+set textobj-entire
+" 应用新映射
+omap kg <Plug>textobj-entire-i
+vmap kg <Plug>textobj-entire-i
+omap ag <Plug>textobj-entire-a
+vmap ag <Plug>textobj-entire-a
+" 移除默认映射
+unmap ae
+unmap ie
+" ---------------------------------
+" 交换两个scope的位置 cxkw
+set exchange
+" cxkw        cx:第一次使用时，定义第一个要交换的 {motion}。第二次使用时，定义第二个 {motion} 并执行交换。
+" cxx: 类似cx，但使用当前行。
+" X: 类似cx，但是用于可视模式。
+" cxc: 清除所有等待交换的 {motion}。
+" ---------------------------------
+" ai aI ki
+set textobj-indent
+omap ki <Plug>textobj-indent-ii
+vmap ki <Plug>textobj-indent-ii
+unmap ii
+
+" ---------------------------------
+" 因为已经在keymap设置了 ctrl+unei 所以NERDTree就不需要了,但可以保留，方便映射 split
+set NERDTree
+" " Open files, directories and bookmarks
+" let g:NERDTreeMapActivateNote = o
+" " Open selected file, but leave cursor in the NERDTree
+" let g:NERDTreeMapPreview = 
+" " Open selected node/bookmark in a new tab
+" let g:NERDTreeMapOpenInTab =
+" " Same as 丄 but keep the focus on the current tab
+" let g:NERDTreeMapOpenInTabSilent = 
+" " Open selected file in a split window
+let g:NERDTreeMapOpenSplit='s'
+" " Same as 丄 but leave the cursor on the NERDTree
+" let g:NERDTreeMapPreviewSplit = 
+" " Open selected file in a new vsplit
+let g:NERDTreeMapOpenVSplit='v'
+" " Same as 丄 but leave the cursor on the NERDTree
+" let g:NERDTreeMapPreviewVSplit = 
+" " Recursively open the selected directory
+" let g:NERDTreeMapOpenRecursively = 
+" " Close the current nodes parent
+" let g:NERDTreeMapCloseDir = 
+" " Recursively close all children of the current node
+" let g:NERDTreeMapCloseChildren = 
+" " Jump to the root node
+" let g:NERDTreeMapJumpRoot = 
+" " Jump to current nodes parent
+" let g:NERDTreeMapJumpParent = 
+" " Jump up inside directories at the current tree depth
+" let g:NERDTreeMapJumpFirstChild = 
+" " Jump down inside directories at the current tree depth
+" let g:NERDTreeMapJumpLastChild = 
+" " Jump down to next sibling of the current directory
+" let g:NERDTreeMapJumpNextSibling = 
+" " Jump up to previous sibling of the current directory
+" let g:NERDTreeMapJumpPrevSibling = 
+" " Recursively refresh the current directory
+" let g:NERDTreeMapRefresh = 
+" " Recursively refresh the current root
+" let g:NERDTreeMapRefreshRoot = 
+" " Display the NERDTree menu
+" let g:NERDTreeMapMenu = 
+" " Close the NERDTree window
+" let g:NERDTreeMapQuit = 
+" " Zoom (maximize/minimize) the NERDTree window
+" let g:NERDTreeMapToggleZoom = 
+" " Delete file or directory
+" let g:NERDTreeMapDelete = 
+" " Create File
+" let g:NERDTreeMapNewFile = 
+" " Create Directory
+" let g:NERDTreeMapNewDir = 
