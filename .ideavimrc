@@ -99,7 +99,7 @@ noremap n h
 noremap i l
 noremap U 5k
 noremap E 5j
-noremap N 0
+noremap N ^
 noremap I $
 noremap W 5w
 noremap B 5b
