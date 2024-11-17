@@ -209,7 +209,8 @@ noremap == :action ReformatCode<CR>
 map \s <Action>(MoveEditorToOppositeTabGroup)
 map \z <Action>(ToggleRenderedDocPresentation)
 
-map <LEADER>zz <Action>(TogglePresentationMode)
+map <LEADER>ZZ <Action>(TogglePresentationMode)
+map <LEADER>zz <Action>(ToggleZenMode)
 
 " ---------------------------------------------
 " FOLD
