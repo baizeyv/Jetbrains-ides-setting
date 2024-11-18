@@ -168,7 +168,7 @@ nnoremap <LEADER>ti :tabn<CR>
 nnoremap <LEADER>tn :tabp<CR>
 nnoremap <LEADER>tx :tabc<CR>
 map <LEADER>tA <Action>(CloseAllEditors)
-map <LEADER>ta (CloseAllUnpinnedEditors)
+map <LEADER>ta <Action>(CloseAllUnpinnedEditors)
 map <LEADER>to <Action>(CloseAllEditorsButActive)
 map <LEADER>tz <Action>(PinActiveEditorTab)
 map <LEADER>tw <Action>(EditSourceInNewWindow)
