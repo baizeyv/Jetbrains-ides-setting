@@ -110,6 +110,11 @@ onoremap k i
 inoremap <C-U> <UP>
 inoremap <C-E> <DOWN>
 
+nnoremap <C-U> <C-y>
+nnoremap <C-E> <C-e>
+nnoremap <C-S-U> <C-u>
+nnoremap <C-S-E> <C-d>
+
 nnoremap <LEADER>wq :wq<CR>
 nnoremap l u
 noremap k i
@@ -186,6 +191,7 @@ map <LEADER>se <Action>(TextSearchAction)
 map <LEADER>ss <Action>(SearchEverywhere)
 map <LEADER>sa <Action>(GotoAction)
 map <LEADER><LEADER> <Action>(GotoFile)
+map <LEADER>sc <Action>(GotoClass)
 
 " ---------------------------------------------
 " Actions
@@ -224,6 +230,7 @@ map gi <Action>(GotoImplementation)
 map gy <Action>(GotoTypeDeclaration)
 map gd <Action>(GotoDeclaration)
 map go <Action>(GoToCodeGroup)
+map gu <Action>(ShowUsages)
 map <LEADER>h <Action>(ShowHoverInfo)
 imap <C-K> :action ShowHoverInfo<CR>
 map <LEADER>ca <Action>(ShowIntentionActions)
@@ -322,6 +329,15 @@ set matchit
 " need vim-flash plugin
 map s <Action>(flash.search)
 
+nnoremap v :unmap ii<CR>v
+nnoremap V :unmap ii<CR>V
+
+" ---------------------------------
+" ai aI ki
+set textobj-indent
+omap ki <Plug>textobj-indent-ii
+vmap ki <Plug>textobj-indent-ii
+unmap ii
 
 " ---------------------------------
 " plugin -> argtextobj
@@ -350,12 +366,6 @@ set exchange
 " cxx: 类似cx，但使用当前行。
 " X: 类似cx，但是用于可视模式。
 " cxc: 清除所有等待交换的 {motion}。
-" ---------------------------------
-" ai aI ki
-set textobj-indent
-omap ki <Plug>textobj-indent-ii
-vmap ki <Plug>textobj-indent-ii
-unmap ii
 
 " ---------------------------------
 " 因为已经在keymap设置了 ctrl+unei 所以NERDTree就不需要了,但可以保留，方便映射 split
